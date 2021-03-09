@@ -35,7 +35,7 @@ CREATE TABLE `answers_sheets` (
   CONSTRAINT `answers_sheets_ibfk_1` FOREIGN KEY (`blank_id`) REFERENCES `blanks` (`id`),
   CONSTRAINT `answers_sheets_ibfk_2` FOREIGN KEY (`q_id`) REFERENCES `questions` (`id`),
   CONSTRAINT `answers_sheets_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -44,7 +44,7 @@ CREATE TABLE `answers_sheets` (
 
 LOCK TABLES `answers_sheets` WRITE;
 /*!40000 ALTER TABLE `answers_sheets` DISABLE KEYS */;
-INSERT INTO `answers_sheets` VALUES (8,1,1,5,'B'),(9,1,1,6,'C'),(10,6,1,7,'A');
+INSERT INTO `answers_sheets` VALUES (27,1,1,5,'A'),(28,1,1,6,'A'),(29,1,2,5,'B'),(30,1,2,6,'B'),(31,6,2,7,'C'),(32,1,3,5,'C'),(33,1,3,6,'C'),(34,6,3,7,'A'),(35,6,1,7,'A');
 /*!40000 ALTER TABLE `answers_sheets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +199,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `role_id` (`role_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Azamat','Saiduly',18,'Football','aza123','SE-1909','azamattolegenov1@gmail.com','+77005488851','$2a$10$2TK7YhZeDFjjA4RwZ8X/zuzjpJ.2hc4HVpk9vJRL4HmJjZUNh3h42',1);
+INSERT INTO `users` VALUES (1,'Azamat','Saiduly',18,'Football','aza123','SE-1909','azamattolegenov1@gmail.com','+77005488851','$2a$10$2TK7YhZeDFjjA4RwZ8X/zuzjpJ.2hc4HVpk9vJRL4HmJjZUNh3h42',1),(2,'Aniyar','Kaliev',18,'Football','aniyar','SE-1909','aniyar@example.com','+77005400022','$2a$10$2TK7YhZeDFjjA4RwZ8X/zuzjpJ.2hc4HVpk9vJRL4HmJjZUNh3h42',2),(3,'Ainura','Kursabayeva',18,'Read books','ainura1','SE-1909','ainura@example.com','+77775400022','$2a$10$2TK7YhZeDFjjA4RwZ8X/zuzjpJ.2hc4HVpk9vJRL4HmJjZUNh3h42',2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -221,4 +221,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-03-09 19:02:35
+-- Dump completed on 2021-03-09 23:17:54

@@ -1,9 +1,7 @@
 package main.spring.controllers;
 
 import main.spring.dao.*;
-import main.spring.models.Answers_Sheets;
-import main.spring.models.Blank;
-import main.spring.models.User;
+import main.spring.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -74,8 +72,7 @@ public class QuizController {
             answers_sheets.add(answer_sheet);
         }
         answersSheetsDAO.createSheet(answers_sheets);
-        model.addAttribute("message", "Blank was submited!");
-        return "redirect: /quiz/passed/"+b_id;
+        return "redirect:http://localhost:8080/quiz/passed/"+b_id;
     }
 
     @GetMapping("/quiz/passed/{id}")
@@ -108,4 +105,59 @@ public class QuizController {
 
         return "/quiz/quiz_results";
     }
+
+    @GetMapping("/quiz/stats/{id}")
+    public String getStats(Principal principal, Model model, @PathVariable("id") int id){
+        List<Answers_Sheets> list_of_answers = answersSheetsDAO.findByBlankId(id);
+        List<Integer> list_of_passed_users_id = new ArrayList<>();
+        List<Question> blank_questions = questionDAO.findByBlankId(id);
+//        PASSED USERS COUNT
+        int passed_count = 0;
+        List<Stat> statistics = new ArrayList<>();
+        for (int i = 0; i < blank_questions.size(); i++) {
+            int a_count = 0;
+            int b_count = 0;
+            int c_count = 0;
+            for (int j = 0; j < list_of_answers.size(); j++) {
+                if (list_of_answers.get(j).getQ_id() == blank_questions.get(i).getId()){
+                    String ans = list_of_answers.get(j).getQ_ans();
+                    switch (ans){
+                        case ("A"):
+                            a_count++;
+                            break;
+                        case ("B"):
+                            b_count++;
+                            break;
+                        case ("C"):
+                            c_count++;
+                            break;
+                    }
+
+                }
+            }
+            Stat q_stat = new Stat(
+                    blank_questions.get(i).question_text,
+                    blank_questions.get(i).question_variant_a,
+                    blank_questions.get(i).question_variant_b,
+                    blank_questions.get(i).question_variant_c,
+                    a_count, b_count, c_count);
+            System.out.println(q_stat.total+ "-TOTAL");
+            statistics.add(q_stat);
+        }
+
+        for (int i = 0; i < list_of_answers.size(); i++) {
+            if (list_of_answers.get(i).getBlank_id() == id){
+                if (!list_of_passed_users_id.contains(list_of_answers.get(i).getUser_id())){
+                    list_of_passed_users_id.add(list_of_answers.get(i).getUser_id());
+                    passed_count++;
+                }
+            }
+        }
+
+        model.addAttribute("blank",blankDAO.findById(id));
+        model.addAttribute("passed_users", passed_count);
+        model.addAttribute("statistics", statistics);
+        return "/quiz/quiz_statistics";
+    }
+
 }

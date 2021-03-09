@@ -151,5 +151,4 @@ public class AdminController {
         return "/main/admin_panel";
     }
 
-
 }

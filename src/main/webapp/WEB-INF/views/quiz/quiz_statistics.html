@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Quiz results</title>
+    <title>Quiz statistics</title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -57,14 +57,13 @@
         <!--        Main-->
         <div class="row" style="margin-top: 5%; line-height: 40px">
             <h3 style="border-bottom: solid 1px gainsboro">Blank | <span th:text="${blank.getName()}"></span> | Topic: <span th:text="${blank.getTopic()}"></span> </h3>
-            <h3>Results</h3>
-            <div class="question" th:each="answerSheet: ${answersSheet}">
-                <label th:text="${answerSheet[0]}" style="border-bottom: #333333 solid 1px"></label>
-                <label th:text="${answerSheet[1]}"></label>
+            <h3>Statistics</h3>
+            <div class="question" th:each="statistic: ${statistics}">
+                <label th:text="${statistic.question_text}" style="border-bottom: #333333 solid 1px"></label>
+                <label style="white-space: pre-line" th:text="${statistic.toString()}"></label>
             </div>
-            <div style="text-align: center">
-                <a th:href="@{/quiz/stats/__${blank.getId()}__}" class="button button-primary" style="margin:0 auto !important; display:inline-block !important; text-align: center !important;">VIEW QUIZ STATISTICS</a>
-            </div>
+            <hr>
+            <h3>Total passed users count: <span th:text="${passed_users}"></span></h3>
         </div>
     </div>
 </div>

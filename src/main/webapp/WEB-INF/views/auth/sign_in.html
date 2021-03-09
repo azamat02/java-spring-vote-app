@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign in</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/skeleton.css}">
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" th:href="@{/images/favicon.png}">
+</head>
+<body>
+    <div class="container">
+        <div class="row" style="margin-top: 5%">
+            <h1>Sign in</h1>
+            <hr>
+            <form th:method="POST" th:action="@{/auth/signin}">
+                <div class="row">
+                    <div class="six columns">
+                        <label for="login_login">Your login</label>
+                        <input class="u-full-width" name="username" required type="text" placeholder="test" id="login_login">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="six columns">
+                        <label for="login_pass">Your password</label>
+                        <input class="u-full-width" name="password" required type="password" placeholder="password " id="login_pass">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <input class="button-primary" type="submit" value="SIGN IN">
+                    <a class="button" href="/">GO BACK TO MAIN PAGE</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+
+</body>
+</html>

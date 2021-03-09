@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz results</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/skeleton.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" th:href="@{/images/favicon.png}">
+    <script defer th:src="@{/js/jquery-3.5.1.min.js}"></script>
+    <script defer th:src="@{/js/main.js}"></script>
+    <script defer src="https://kit.fontawesome.com/6726cbbd79.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+        <!--        Navbar-->
+        <div class="row" style="margin-top: 20px;">
+            <navbar>
+                <div class="five columns">
+                    <h1>User Profile</h1>
+                </div>
+                <div class="seven columns">
+                    <a href="/" class="button">
+                        <span>
+                            <span class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#353535" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <polyline points="5 12 3 12 12 3 21 12 19 12" />
+                                    <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                    <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                </svg>
+                            </span>
+                            <span class="text">
+                                Main page
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            </navbar>
+        </div>
+
+        <!--        Main-->
+        <div class="row" style="margin-top: 5%; line-height: 40px">
+            <h3 style="border-bottom: solid 1px gainsboro">Blank | <span th:text="${blank.getName()}"></span> | Topic: <span th:text="${blank.getTopic()}"></span> </h3>
+            <h3>Results</h3>
+            <div class="question" th:each="answerSheet: ${answersSheet}">
+                <label th:text="${answerSheet[0]}" style="border-bottom: #333333 solid 1px"></label>
+                <label th:text="${answerSheet[1]}"></label>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

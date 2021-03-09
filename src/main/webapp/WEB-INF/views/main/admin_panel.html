@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorator="layout/root_layout"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin panel</title>
+
+    <!-- Mobile Specific Metas
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/skeleton.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" th:href="@{/static/images/favicon.png}">
+    <script th:src="@{/js/jquery-3.5.1.min.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <script defer src="https://kit.fontawesome.com/6726cbbd79.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <!--        Navbar-->
+        <div class="row" style="margin-top: 20px;">
+            <navbar>
+                <div class="five columns">
+                    <h1>Admin panel</h1>
+                </div>
+                <div class="seven columns">
+                    <a href="/" class="button">
+                            <span>
+                                <span class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#353535" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                        <polyline points="5 12 3 12 12 3 21 12 19 12" />
+                                        <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                        <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                    </svg>
+                                </span>
+                                <span class="text">
+                                    Main page
+                                </span>
+                            </span>
+                    </a>
+                    <a href="/profile" sec:authorize="isAuthenticated()" class="button button-primary">
+                            <span>
+                                <span class="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                      <circle cx="12" cy="7" r="4" />
+                                      <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                                    </svg>
+                                </span>
+                                <span class="text">
+                                    Profile
+                                </span>
+                            </span>
+                    </a>
+                    <a href="/logout" sec:authorize="isAuthenticated()" class="button button-primary">
+                            <span>
+                                <span class="text">
+                                    Logout
+                                </span>
+                               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-logout" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                  <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                  <path d="M7 12h14l-3 -3m0 6l3 -3" />
+                                </svg>
+                            </span>
+                    </a>
+                    <a href="/admin" sec:authorize="hasRole('ROLE_ADMIN')" class="button button-primary">
+                            <span>
+                                <span class="text">
+                                    Admin panel
+                                </span>
+                               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-alt" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                  <rect x="4" y="8" width="4" height="4" />
+                                  <line x1="6" y1="4" x2="6" y2="8" />
+                                  <line x1="6" y1="12" x2="6" y2="20" />
+                                  <rect x="10" y="14" width="4" height="4" />
+                                  <line x1="12" y1="4" x2="12" y2="14" />
+                                  <line x1="12" y1="18" x2="12" y2="20" />
+                                  <rect x="16" y="5" width="4" height="4" />
+                                  <line x1="18" y1="4" x2="18" y2="5" />
+                                  <line x1="18" y1="9" x2="18" y2="20" />
+                                </svg>
+                            </span>
+                    </a>
+                </div>
+            </navbar>
+        </div>
+
+        <!--        Main-->
+        <div class="row" style="margin-top: 5%; line-height: 40px">
+            <h3 style="border-bottom: solid 1px gainsboro">Actions</h3>
+            <h5>Current admin: <span th:text="${session.admin_name}"></span></h5>
+            <div th:if="${message}" th:text="${message}" style="padding: 10px 20px; border-radius: 5px; border: solid 1px #457b9d; color: #457b9d;">Message</div>
+
+            <b>Questions controller</b><br>
+            <a class="button button-primary" id="add_blank">
+                ADD BLANK
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <circle cx="12" cy="12" r="9" />
+                    <line x1="9" y1="12" x2="15" y2="12" />
+                    <line x1="12" y1="9" x2="12" y2="15" />
+                </svg>
+            </a>
+            <a class="button button-primary" id="add_question">
+                ADD QUESTION
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <circle cx="12" cy="12" r="9" />
+                    <line x1="9" y1="12" x2="15" y2="12" />
+                    <line x1="12" y1="9" x2="12" y2="15" />
+                </svg>
+            </a>
+            <a class="button button-primary" id="update_question">
+                UPDATE QUESTION
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                    <line x1="16" y1="5" x2="19" y2="8" />
+                </svg>
+            </a>
+            <a class="button button-primary" id="delete_question">
+                DELETE QUESTION
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <line x1="4" y1="7" x2="20" y2="7" />
+                    <line x1="10" y1="11" x2="10" y2="17" />
+                    <line x1="14" y1="11" x2="14" y2="17" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                </svg>
+            </a>
+            <br>
+            <form action="/admin/add_question" method="POST" id="add_question_form">
+                <label>Add question</label>
+                <input type="text" name="q_text" style="width: 550px" placeholder="Question text"><br>
+                <input type="text" name="q_option_a" placeholder="Question option A">
+                <input type="text" name="q_option_b" placeholder="Question option B">
+                <input type="text" name="q_option_c" placeholder="Question option C">
+
+                <select name="blank_id" class="u-full-width">
+                    <option th:each="blank : ${blanks}" th:value="${blank.getId()}">
+                                        <span th:inline="text">
+                                            [[${blank.getName()}]] Topic: [[${blank.getTopic()}]];
+                                        </span>
+                    </option>
+                </select>
+                <input type="submit" class="button-primary" value="ADD QUESTION">
+            </form>
+            <form action="/admin/add_blank" method="POST" id="add_blank_form">
+                <label>Add question</label>
+                <input type="text" name="b_name" placeholder="Blank name">
+                <input type="text" name="b_topic" placeholder="Blank topic">
+                <input type="submit" class="button-primary" value="ADD BLANK">
+            </form>
+            <form action="/admin/update_question" method="POST" id="update_question_form">
+                <label>Update question</label>
+                <label>Select question to update</label>
+                <select name="q_id" class="u-full-width">
+                    <option th:each="question : ${questions}" th:value="${question.getId()}">
+                                        <span th:inline="text">
+                                            Question: [[${question.getQuestion_text()}]] | Blank ID: [[${question.getBlank_id()}]];
+                                        </span>
+                    </option>
+                </select>
+                <input type="text" name="q_text" style="width: 550px" placeholder="Question text"><br>
+                <input type="text" name="q_option_a" placeholder="Question option A">
+                <input type="text" name="q_option_b" placeholder="Question option B">
+                <input type="text" name="q_option_c" placeholder="Question option C">
+
+                <select name="blank_id" class="u-full-width">
+                    <option th:each="blank : ${blanks}" th:value="${blank.getId()}">
+                                        <span th:inline="text">
+                                            Name: [[${blank.getName()}]] | Topic: [[${blank.getTopic()}]];
+                                        </span>
+                    </option>
+                </select>
+                <input type="submit" class="button-primary" value="UPDATE QUESTION">
+            </form>
+            <form action="/admin/delete_question" method="POST" id="delete_question_form">
+                <label>Delete question</label>
+                <label>Select question to delete</label>
+                <select name="q_id" class="u-full-width">
+                    <option th:each="question : ${questions}" th:value="${question.getId()}">
+                                        <span th:inline="text">
+                                            Question: [[${question.getQuestion_text()}]] | Blank ID: [[${question.getBlank_id()}]];
+                                        </span>
+                    </option>
+                </select>
+                <input type="submit" class="button-primary" value="DELETE QUESTION">
+            </form>
+
+            <b>Authorities controller</b><br>
+            <a class="button button-primary" id="add_authority">
+                ADD AUTHORITY
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <circle cx="12" cy="12" r="9" />
+                    <line x1="9" y1="12" x2="15" y2="12" />
+                    <line x1="12" y1="9" x2="12" y2="15" />
+                </svg>
+            </a>
+            <a class="button button-primary" id="remove_authority">
+                REMOVE AUTHORITY
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <line x1="4" y1="7" x2="20" y2="7" />
+                    <line x1="10" y1="11" x2="10" y2="17" />
+                    <line x1="14" y1="11" x2="14" y2="17" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                </svg>
+            </a>
+            <br>
+            <form action="/admin/add_authority" method="POST" id="add_authority_form">
+                <label>Add authority to role</label>
+                <label>Choose authority to add</label>
+                <select name="a_id" class="u-full-width">
+                    <option th:each="authority : ${authorities}" th:value="${authority.getId()}">
+                                        <span th:inline="text">
+                                            Name: [[${authority.getName()}]];
+                                        </span>
+                    </option>
+                </select>
+                <label>Choose role for authority</label>
+                <select name="r_id" class="u-full-width">
+                    <option th:each="role : ${roles}" th:value="${role.getId()}">
+                                        <span th:inline="text">
+                                            Name: [[${role.getName()}]];
+                                        </span>
+                    </option>
+                </select>
+                <input type="submit" class="button-primary" value="ADD AUTHORITY">
+            </form>
+            <form action="/admin/delete_authority" method="POST" id="delete_authority_form">
+                <label>Delete authority</label>
+                <label>Select role</label>
+                <select name="r_id" class="u-full-width">
+                    <option th:each="role : ${roles}" th:value="${role.getId()}">
+                        <span th:inline="text">
+                            Name: [[${role.getName()}]];
+                        </span>
+                    </option>
+                </select>
+                <label>Select authority to delete</label>
+                <select name="a_id" class="u-full-width">
+                    <option th:each="authority : ${authorities}" th:value="${authority.getId()}">
+                        <span th:inline="text">
+                            Name: [[${authority.getName()}]];
+                        </span>
+                    </option>
+                </select>
+                <input type="submit" class="button-primary" value="DELETE AUTHORITY">
+            </form>
+
+
+            <b>Roles controller</b><br>
+            <a class="button button-primary" id="add_role">
+                ADD ROLE
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <circle cx="12" cy="12" r="9" />
+                    <line x1="9" y1="12" x2="15" y2="12" />
+                    <line x1="12" y1="9" x2="12" y2="15" />
+                </svg>
+            </a>
+            <a class="button button-primary" id="edit_role">
+                EDIT ROLE OF USERS
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-edit" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" />
+                    <path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" />
+                    <line x1="16" y1="5" x2="19" y2="8" />
+                </svg>
+            </a>
+            <a class="button button-primary" id="remove_role">
+                REMOVE ROLE
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-trash" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <line x1="4" y1="7" x2="20" y2="7" />
+                    <line x1="10" y1="11" x2="10" y2="17" />
+                    <line x1="14" y1="11" x2="14" y2="17" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                </svg>
+            </a>
+            <br>
+            <form action="/admin/add_role" method="POST" id="add_role_form">
+                <label>Add new role</label>
+                <input type="text" class="u-full-width" name="role_name" placeholder="Role name...">
+                <input type="submit" class="button-primary" value="ADD ROLE">
+            </form>
+            <form action="/admin/edit_role" method="POST" id="edit_role_form">
+                <label>Edit role</label>
+                <label>Choose user to change role</label>
+                <select name="u_id" class="u-full-width">
+                    <option th:each="user : ${users}" th:value="${user.getId()}">
+                        <span th:inline="text">
+                            Name: [[${user.getFirst_name()}]] | Group: [[${user.getGroup_name()}]];
+                        </span>
+                    </option>
+                </select>
+
+                <label>Choose role to assign</label>
+                <select name="r_id" class="u-full-width">
+                    <option th:each="role : ${roles}" th:value="${role.getId()}">
+                        <span th:inline="text">
+                            Name: [[${role.getName()}]];
+                        </span>
+                    </option>
+                </select>
+                <input type="submit" class="button-primary" value="EDIT ROLE">
+            </form>
+            <form action="/admin/delete_role" method="POST" id="remove_role_form">
+                <label>Delete role</label>
+                <label>Choose role to delete</label>
+                <label>INFO: AFTER DELETING ROLE ALL AUTHORITIES FOR THIS ROLE WILL BE DELETED</label>
+                <select name="r_id" class="u-full-width">
+                    <option th:each="role : ${roles}" th:value="${role.getId()}">
+                        <span th:inline="text">
+                            Name: [[${role.getName()}]];
+                        </span>
+                    </option>
+                </select>
+                <input type="submit" class="button-primary" value="DELETE AUTHORITY">
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

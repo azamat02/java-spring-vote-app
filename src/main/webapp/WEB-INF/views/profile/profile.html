@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorator="layout/root_layout"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- FONT
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+    <!-- CSS
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="stylesheet" th:href="@{/css/normalize.css}">
+    <link rel="stylesheet" th:href="@{/css/skeleton.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+
+    <!-- Favicon
+    –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+    <link rel="icon" type="image/png" th:href="@{/images/favicon.png}">
+    <script defer th:src="@{/js/jquery-3.5.1.min.js}"></script>
+    <script defer th:src="@{/js/main.js}"></script>
+    <script defer src="https://kit.fontawesome.com/6726cbbd79.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container">
+
+    <div class="row">
+<!--        Navbar-->
+        <div class="row" style="margin-top: 20px;">
+            <navbar>
+                <div class="five columns">
+                    <h1>User Profile</h1>
+                </div>
+                <div class="seven columns">
+                    <a href="/" class="button">
+                        <span>
+                            <span class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="16" height="16" viewBox="0 0 24 24" stroke-width="1.5" stroke="#353535" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                    <polyline points="5 12 3 12 12 3 21 12 19 12" />
+                                    <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                    <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                                </svg>
+                            </span>
+                            <span class="text">
+                                Main page
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            </navbar>
+        </div>
+
+<!--        Main-->
+        <div class="row" style="margin-top: 5%; line-height: 40px">
+            <h3 style="border-bottom: solid 1px gainsboro">Information</h3>
+            <div th:if="${message}" th:text="${message}" style="padding: 10px 20px; border-radius: 5px; border: solid 1px #457b9d; color: #457b9d;">Message</div>
+            <form th:method="POST" th:action="@{/auth/changedetails}" >
+                <span th:inline="text"><b>User first name:</b> <input type="text" name="first_name" th:value="${user.getFirst_name()}"></span><br>
+                <span th:inline="text"><b>User last name:</b> <input type="text" name="last_name" th:value="${user.getLast_name()}"></span><br>
+                <span th:inline="text"><b>User age:</b> <input type="text" name="age" th:value="${user.getAge()}"></span><br>
+                <span th:inline="text"><b>User interests:</b> <input type="text" name="interests" th:value="${user.getInterests()}"></span><br>
+                <span th:inline="text"><b>User email:</b> [[${user.getEmail()}]]</span><br>
+                <span th:inline="text"><b>User phone:</b> [[${user.getPhone()}]]</span><br>
+                <span th:inline="text"><b>User login:</b> [[${user.getLogin()}]]</span><br>
+                <span th:inline="text"><b>User group:</b> [[${user.getGroup_name()}]]</span><br><br>
+                <input type="submit" name="change" value="CHANGE DETAILS" class="button-primary">
+            </form>
+            <section th:if="${blanks.size() != 0}">
+                <hr>
+                <h3>Passed blanks</h3>
+                <hr>
+                <div class="row">
+                    <div class="three columns blank_container passed" th:each="blank: ${blanks}"  th:data-id="${blank.getId()}">
+                        Name: [[${blank.getName()}]] <br>
+                        Topic: [[${blank.getTopic()}]]
+                    </div>
+                </div>
+            </section>
+            <h3 style="border-bottom: solid 1px gainsboro">Change password</h3>
+            <form th:method="POST" th:action="@{/auth/changepass}" id="change_pass_form">
+                <span style="color: red" id="error_message"></span><br>
+                <div class="row">
+                    <div class="six columns">
+                        <label for="change_pass">Password </label>
+                        <input class="u-full-width" required type="password" placeholder="password" id="change_pass" name="password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="six columns">
+                        <label for="change_pass2">Repeat password</label>
+                        <input class="u-full-width"required type="password" placeholder="password" id="change_pass2" name="password2">
+                    </div>
+                </div>
+                <input type="submit" name="change" value="CHANGE PASSWORD" class="button-primary" id="submit_button">
+            </form>
+            <button class="button button-primary" id="change_pass_button">CHANGE PASSWORD</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
